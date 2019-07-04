@@ -14,6 +14,7 @@ import Form from './Form';
 
 // Query tested in Playground
 // A) String template calling  - it will pass below as a function and parse
+// query is like a Read
 const TodoQuery = gql`               
 {
   todos {
@@ -24,6 +25,7 @@ const TodoQuery = gql`
 }
 `;
 
+// mutation is like a Post/Put/Delete
 const CreateMutation = gql`
 mutation ($text: String!) {
  createTodo(text: $text){
@@ -61,8 +63,7 @@ class App extends Component {
         // Read the data from our cache for this query.
         const data = store.readQuery({ query: TodoQuery });
         // Add our comment from the mutation to the end.
-        data.todos.unshift(createTodo);
-        console.log(createTodo)                     //Unshift NOT WORKING
+        data.todos.unshift(createTodo);                       //Unshift NOT WORKING
         // Write our data back to the cache.
         store.writeQuery({ query: TodoQuery, data });
       }
